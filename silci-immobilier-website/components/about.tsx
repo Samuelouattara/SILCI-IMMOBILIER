@@ -126,12 +126,7 @@ export function About() {
 
               <div className="mt-8 pt-8 border-t border-border">
                 <div className="text-center">
-                  <p className="text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">NRCCM:</span> N°CI-GRDBASSAM-2021-B-12398
-                  </p>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">N° CC:</span> 22 42 777 L
-                  </p>
+               
                 </div>
               </div>
             </div>

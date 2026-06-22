@@ -1,7 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import Link from "next/link";
 
 const footerLinks = {
@@ -19,16 +16,48 @@ const footerLinks = {
   ],
 };
 
+const contactInfo = [
+  {
+    icon: Phone,
+    items: [
+      { label: "+225 27 24 32 45 38", href: "tel:+2252724324538" },
+      { label: "+225 07 97 88 88 61", href: "tel:+2250797888861" },
+    ],
+  },
+  {
+    icon: Mail,
+    items: [
+      { label: "silci0immobilier@gmail.com", href: "mailto:silci0immobilier@gmail.com" },
+    ],
+  },
+  {
+    icon: MapPin,
+    items: [
+      {
+        label: "Mockey-Ville, Grand-Bassam",
+        href: "https://maps.google.com/?q=Grand-Bassam,Côte+d'Ivoire",
+      },
+      { label: "Côte d'Ivoire", href: null },
+    ],
+  },
+  {
+    icon: Clock,
+    items: [
+      { label: "Lun - Ven : 8h - 18h", href: null },
+      { label: "Sam : 9h - 14h", href: null },
+    ],
+  },
+];
+
 export function Footer() {
   return (
     <footer className="bg-foreground text-white">
-      {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3">
-              <svg viewBox="0 0 120 60" className="h-12 w-24">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link href="/" className="inline-flex items-center gap-3">
+              <svg viewBox="0 0 120 60" className="h-12 w-24" aria-hidden="true">
                 <ellipse cx="25" cy="8" rx="6" ry="6" fill="#F26522" />
                 <ellipse cx="60" cy="8" rx="6" ry="6" fill="#F26522" />
                 <ellipse cx="95" cy="8" rx="6" ry="6" fill="#F26522" />
@@ -37,68 +66,82 @@ export function Footer() {
                 <path d="M80 50 L95 20 L110 50" stroke="#808080" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
-            <p className="mt-4 text-white/60 leading-relaxed">
-              La Crédibilité notre quotidien. Votre partenaire de confiance pour tous vos projets immobiliers en Côte d&apos;Ivoire.
+            <p className="mt-4 text-sm font-medium text-white/80">
+              La Crédibilité notre quotidien
             </p>
-            <div className="mt-6 space-y-3">
-              <a href="tel:+22527243245 38" className="flex items-center gap-3 text-white/70 hover:text-secondary transition-colors">
-                <Phone className="h-4 w-4" />
-                <span>+225 27 24 32 45 38</span>
-              </a>
-              <a href="mailto:silci0immobilier@gmail.com" className="flex items-center gap-3 text-white/70 hover:text-secondary transition-colors">
-                <Mail className="h-4 w-4" />
-                <span>silci0immobilier@gmail.com</span>
-              </a>
-              <div className="flex items-center gap-3 text-white/70">
-                <MapPin className="h-4 w-4" />
-                <span>Mockey-Ville, Grand-Bassam</span>
-              </div>
+            <p className="mt-3 text-sm text-white/60 leading-relaxed">
+              Votre partenaire de confiance pour tous vos projets immobiliers en Côte d&apos;Ivoire.
+            </p>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-white/90 mb-5">
+              Contact
+            </h4>
+            <ul className="space-y-4">
+              {contactInfo.map((group) => (
+                <li key={group.icon.name} className="flex gap-3">
+                  <group.icon className="h-4 w-4 mt-0.5 shrink-0 text-secondary" />
+                  <div className="space-y-1">
+                    {group.items.map((item) =>
+                      item.href ? (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          target={item.href.startsWith("http") ? "_blank" : undefined}
+                          rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          className="block text-sm text-white/60 hover:text-secondary transition-colors"
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <span key={item.label} className="block text-sm text-white/60">
+                          {item.label}
+                        </span>
+                      )
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Navigation */}
+          <div className="grid grid-cols-2 gap-8 sm:col-span-2 lg:col-span-1">
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-white/90 mb-5">
+                Services
+              </h4>
+              <ul className="space-y-2.5">
+                {footerLinks.services.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-white/60 hover:text-secondary transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          {/* Services Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-6">Nos Services</h4>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-white/60 hover:text-secondary transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-6">Entreprise</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-white/60 hover:text-secondary transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Info */}
-          <div>
-            <h4 className="text-lg font-semibold mb-6">Informations Légales</h4>
-            <div className="space-y-3 text-white/60 text-sm">
-              <p><span className="text-white/80">Forme juridique:</span> SARL</p>
-              <p><span className="text-white/80">Capital:</span> 5 000 000 FCFA</p>
-              <p><span className="text-white/80">NRCCM:</span> N°CI-GRDBASSAM-2021-B-12398</p>
-              <p><span className="text-white/80">N° CC:</span> 22 42 777 L</p>
-              <p><span className="text-white/80">Gérant:</span> M. KOUADIO YAO SYLVAIN</p>
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-white/90 mb-5">
+                Entreprise
+              </h4>
+              <ul className="space-y-2.5">
+                {footerLinks.company.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-white/60 hover:text-secondary transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -111,11 +154,14 @@ export function Footer() {
             <p className="text-white/50 text-sm text-center md:text-left">
               © {new Date().getFullYear()} SILCI-IMMOBILIER. Tous droits réservés.
             </p>
-            <div className="flex items-center gap-6 text-white/50 text-sm">
-              <a href="https://www.silici-immo.ci" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
-                www.silici-immo.ci
-              </a>
-            </div>
+            <a
+              href="https://www.silici-immo.ci"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/50 text-sm hover:text-secondary transition-colors"
+            >
+              www.silici-immo.ci
+            </a>
           </div>
         </div>
       </div>

@@ -12,6 +12,12 @@ const testimonials = [
     location: "Abidjan",
   },
   {
+    name : "Georges D.",
+    role : "Entrepreneur",
+    content : "SILCI-IMMOBILIER m'a accompagné dans la réalisation de mon projet immobilier. Leur expertise et leur professionnalisme m'ont permis de réaliser mon projet sans soucis. Je recommande vivement!",
+    location : "Yamoussoukro",
+  },
+  {
     name: "Marie-Claire D.",
     role: "Investisseur",
     content: "L'équipe de SILCI m'a accompagné dans tout le processus d'achat et de lotissement. Un service irréprochable et des conseils précieux.",
